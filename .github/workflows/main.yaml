@@ -40,6 +40,7 @@ jobs:
             - name: 'Terraform init'
               run:  |
                      terraform init
+                     
               working-directory: ./terraform-code
                 
             - name: 'Terraform plan'
