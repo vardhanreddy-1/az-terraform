@@ -1,0 +1,32 @@
+name: Terraform deploy
+
+on:
+    push:
+        branches:
+            - main
+
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+      terraform-deploy-job:
+        name: terraform deployment
+        runs-on: 'ubuntu-latest'
+        steps:
+            - name: 'Checkout code'
+              uses: actions/checkout@v5
+              with:
+                     fetch-depth: 0
+            - name: 'Azure Authentication'
+              uses: azure/login@v1
+              with:
+                     client-id: ${{ secrets.CLIENT_ID }}
+                     tenant-id: ${{ secrets.TENANT_ID }}
+                     enable-AzPSSession: true
+                     allow-no-subscriptions: true
+            - name: 'Setup Terraform'
+              uses: hashicorp/setup-terraform@v2
+              
+                     
