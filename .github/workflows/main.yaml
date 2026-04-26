@@ -40,18 +40,14 @@ jobs:
             - name: 'Terraform init'
               run:  |
                      terraform init
-              working-directory: ${{ env.TERRAFORM_WORKING_DIR }}
                 
             - name: 'Terraform plan'
               run:  |
                     terraform plan
-              working-directory: ${{ env.TERRAFORM_WORKING_DIR }}
 
             - name: 'Terraform apply'
               if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push'}}
               run:  |
                     terraform apply -auto-approve
-              working-directory: ${{ env.TERRAFORM_WORKING_DIR }}
-
               
                      
